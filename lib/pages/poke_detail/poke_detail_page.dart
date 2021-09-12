@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/consts/consts_api.dart';
-import 'package:pokedex/consts/consts_app.dart';
 import 'package:pokedex/models/pokeapi.dart';
-import 'package:pokedex/pages/homepage/widgets/poke_item.dart';
 import 'package:pokedex/stores/pokeapi_store.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
