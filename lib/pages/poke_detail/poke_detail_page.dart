@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/consts/consts_api.dart';
@@ -26,8 +28,8 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    _controller.forward();
-    _controller.repeat();
+    // _controller.forward();
+    //_controller.repeat();
     super.initState();
   }
 
@@ -100,20 +102,25 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
               );
             },
           ),
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return Align(
-                alignment: Alignment.topCenter,
-                child: RotationTransition(
-                  turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-                  child: CachedNetworkImage(
-                    imageUrl: 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${_pokemon.num}.png',
-                    height: 200,
-                  ),
-                ),
-              );
-            },
+          Align(
+            alignment: Alignment.center,
+            child: GestureDetector(
+              onTap: () {
+                _controller.forward(from: 0);
+              },
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return RotationTransition(
+                    turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                    child: CachedNetworkImage(
+                      imageUrl: 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${_pokemon.num}.png',
+                      height: lerpDouble(30, 200, _controller.value),
+                    ),
+                  );
+                },
+              ),
+            ),
           )
         ],
       ),
