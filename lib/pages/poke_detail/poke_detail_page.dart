@@ -28,7 +28,7 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    // _controller.forward();
+    _controller.forward();
     //_controller.repeat();
     super.initState();
   }
@@ -59,7 +59,7 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 0.0),
             child: Align(
               child: Row(
                 children: [
@@ -88,22 +88,9 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
             ),
           ),
           Container(height: MediaQuery.of(context).size.height / 3),
-          SlidingSheet(
-            elevation: 0,
-            cornerRadius: 16,
-            snapSpec: const SnapSpec(
-              snap: true,
-              snappings: [0.7, 1.0],
-              positioning: SnapPositioning.relativeToAvailableSpace,
-            ),
-            builder: (context, state) {
-              return Container(
-                height: MediaQuery.of(context).size.height,
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.center,
+          Positioned(
+            top: 50,
+            left: (MediaQuery.of(context).size.width / 2) - 75,
             child: GestureDetector(
               onTap: () {
                 _controller.forward(from: 0);
@@ -115,13 +102,28 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
                     turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
                     child: CachedNetworkImage(
                       imageUrl: 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${_pokemon.num}.png',
-                      height: lerpDouble(30, 200, _controller.value),
+                      height: lerpDouble(30, 150, _controller.value),
+                      width: 150,
                     ),
                   );
                 },
               ),
             ),
-          )
+          ),
+          SlidingSheet(
+            elevation: 0,
+            cornerRadius: 16,
+            snapSpec: const SnapSpec(
+              snap: true,
+              snappings: [0.68, 0.93],
+              positioning: SnapPositioning.relativeToAvailableSpace,
+            ),
+            builder: (context, state) {
+              return Container(
+                height: MediaQuery.of(context).size.height,
+              );
+            },
+          ),
         ],
       ),
     );
