@@ -28,6 +28,11 @@ abstract class _PokeApiStoreBase with Store {
   }
 
   @action
+  changeName({required Pokemon pokemon, required String newName}) {
+    pokemon.name = newName;
+  }
+
+  @action
   Widget getImage({required String numero}) {
     return CachedNetworkImage(
       placeholder: (context, url) => new Container(

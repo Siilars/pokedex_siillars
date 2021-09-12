@@ -1,20 +1,46 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/consts/consts_api.dart';
 import 'package:pokedex/models/pokeapi.dart';
 import 'package:pokedex/stores/pokeapi_store.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
-class PokeDetailPage extends StatelessWidget {
+class PokeDetailPage extends StatefulWidget {
   final int index;
   final String name;
 
   const PokeDetailPage({Key? key, required this.index, required this.name}) : super(key: key);
 
   @override
+  _PokeDetailPageState createState() => _PokeDetailPageState();
+}
+
+class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+    _controller.forward();
+    _controller.repeat();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     late final pokemonController = Provider.of<PokeApiStore>(context);
-    Pokemon _pokemon = pokemonController.getPokemon(index: index);
+    Pokemon _pokemon = pokemonController.getPokemon(index: widget.index);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -44,9 +70,9 @@ class PokeDetailPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(flex: 50),
+                  Spacer(),
                   Text(
-                    _pokemon.num,
+                    '# ${_pokemon.num}',
                     style: TextStyle(
                       fontFamily: 'Google',
                       fontSize: 22,
@@ -74,6 +100,21 @@ class PokeDetailPage extends StatelessWidget {
               );
             },
           ),
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Align(
+                alignment: Alignment.topCenter,
+                child: RotationTransition(
+                  turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                  child: CachedNetworkImage(
+                    imageUrl: 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${_pokemon.num}.png',
+                    height: 200,
+                  ),
+                ),
+              );
+            },
+          )
         ],
       ),
     );

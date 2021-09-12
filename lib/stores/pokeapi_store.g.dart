@@ -47,6 +47,17 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
+  dynamic changeName({required Pokemon pokemon, required String newName}) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
+        name: '_PokeApiStoreBase.changeName');
+    try {
+      return super.changeName(pokemon: pokemon, newName: newName);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   Widget getImage({required String numero}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
         name: '_PokeApiStoreBase.getImage');

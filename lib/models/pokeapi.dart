@@ -1,7 +1,7 @@
 class Pokemon {
   final int id;
   final String num;
-  final String name;
+  String name;
   final String img;
   final List<String> type;
   final String height;
@@ -17,7 +17,7 @@ class Pokemon {
   final List<Evolution> nextEvolution;
   final List<Evolution> prevEvolution;
 
-  const Pokemon({
+  Pokemon({
     this.id = 0,
     this.num = '',
     this.name = '',
@@ -52,22 +52,10 @@ class Pokemon {
       spawnChance: map['spawnChance'] ?? 0.0,
       avgSpawns: map['avgSpawns'] ?? 0.0,
       spawnTime: map['spawnTime'] ?? '',
-      multipliers: map['multipliers'] == null
-          ? <double>[]
-          : map['multipliers'].cast<double>(),
-      weaknesses: map['weaknesses'] == null
-          ? <String>[]
-          : map['weaknesses'].cast<String>(),
-      nextEvolution: map['nextEvolution'] == null
-          ? <Evolution>[]
-          : (map['nextEvolution'] as List)
-              .map((e) => Evolution.fromMap(e))
-              .toList(),
-      prevEvolution: map['prevEvolution'] == null
-          ? <Evolution>[]
-          : (map['prevEvolution'] as List)
-              .map((e) => Evolution.fromMap(e))
-              .toList(),
+      multipliers: map['multipliers'] == null ? <double>[] : map['multipliers'].cast<double>(),
+      weaknesses: map['weaknesses'] == null ? <String>[] : map['weaknesses'].cast<String>(),
+      nextEvolution: map['nextEvolution'] == null ? <Evolution>[] : (map['nextEvolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
+      prevEvolution: map['prevEvolution'] == null ? <Evolution>[] : (map['prevEvolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
     );
   }
 
@@ -91,6 +79,46 @@ class Pokemon {
       'nextEvolution': this.nextEvolution,
       'prevEvolution': this.prevEvolution,
     };
+  }
+
+  Pokemon copyWith({
+    int? id,
+    String? num,
+    String? name,
+    String? img,
+    List<String>? type,
+    String? height,
+    String? weight,
+    String? candy,
+    int? candyCount,
+    String? egg,
+    double? spawnChance,
+    double? avgSpawns,
+    String? spawnTime,
+    List<double>? multipliers,
+    List<String>? weaknesses,
+    List<Evolution>? nextEvolution,
+    List<Evolution>? prevEvolution,
+  }) {
+    return Pokemon(
+      id: id ?? this.id,
+      num: num ?? this.num,
+      name: name ?? this.name,
+      img: img ?? this.img,
+      type: type ?? this.type,
+      height: height ?? this.height,
+      weight: weight ?? this.weight,
+      candy: candy ?? this.candy,
+      candyCount: candyCount ?? this.candyCount,
+      egg: egg ?? this.egg,
+      spawnChance: spawnChance ?? this.spawnChance,
+      avgSpawns: avgSpawns ?? this.avgSpawns,
+      spawnTime: spawnTime ?? this.spawnTime,
+      multipliers: multipliers ?? this.multipliers,
+      weaknesses: weaknesses ?? this.weaknesses,
+      nextEvolution: nextEvolution ?? this.nextEvolution,
+      prevEvolution: prevEvolution ?? this.prevEvolution,
+    );
   }
 }
 

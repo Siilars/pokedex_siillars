@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/consts/consts_app.dart';
 import 'package:pokedex/models/pokeapi.dart';
+import 'package:pokedex/pages/homepage/widgets/dialog_change_name.dart';
 import 'package:pokedex/pages/homepage/widgets/poke_item.dart';
 import 'package:pokedex/pages/poke_detail/poke_detail_page.dart';
 import 'package:pokedex/stores/pokeapi_store.dart';
@@ -77,16 +78,25 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.transparent,
                                       types: pokemon.type,
                                     ),
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return DialogChangeName(pokemon: pokemon, pokeController: pokeController);
+                                        },
+                                      );
+                                    },
                                     onTap: () {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) => PokeDetailPage(
-                                              index: index,
-                                              name: '_pokemon',
-                                            ),
-                                            fullscreenDialog: true,
-                                          ));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) => PokeDetailPage(
+                                            index: index,
+                                            name: '_pokemon',
+                                          ),
+                                          fullscreenDialog: true,
+                                        ),
+                                      );
                                     },
                                   ),
                                 ),
