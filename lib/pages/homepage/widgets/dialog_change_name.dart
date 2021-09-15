@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokeapi.dart';
 import 'package:pokedex/stores/pokeapi_store.dart';
-import 'package:provider/provider.dart';
 
 class DialogChangeName extends StatefulWidget {
   final Pokemon pokemon;

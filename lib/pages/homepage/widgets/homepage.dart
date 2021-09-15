@@ -72,11 +72,7 @@ class _HomePageState extends State<HomePage> {
                                 child: ScaleAnimation(
                                   child: GestureDetector(
                                     child: PokeItem(
-                                      index: index,
-                                      name: pokemon.name,
-                                      num: pokemon.num,
-                                      color: Colors.transparent,
-                                      types: pokemon.type,
+                                      pokemon: pokemon,
                                     ),
                                     onLongPress: () {
                                       showDialog(
@@ -87,12 +83,12 @@ class _HomePageState extends State<HomePage> {
                                       );
                                     },
                                     onTap: () {
+                                      pokeController.setPokemonAtual(pokemon: pokemon);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (BuildContext context) => PokeDetailPage(
-                                            index: index,
-                                            name: '_pokemon',
+                                            pokemon: pokemon,
                                           ),
                                           fullscreenDialog: true,
                                         ),

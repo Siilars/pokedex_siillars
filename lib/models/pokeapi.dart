@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 class Pokemon {
   final int id;
   final String num;
@@ -16,6 +19,11 @@ class Pokemon {
   final List<String> weaknesses;
   final List<Evolution> nextEvolution;
   final List<Evolution> prevEvolution;
+
+  Color get typeColor => _getTypeColor(type[0]);
+  Color get typeSecondaryColor => type.length > 1 ? _getTypeColor(type[1]) : _getTypeColor(type[0]).withAlpha(255);
+
+  String get urlImg => _getUrlImg(num);
 
   Pokemon({
     this.id = 0,
@@ -119,6 +127,53 @@ class Pokemon {
       nextEvolution: nextEvolution ?? this.nextEvolution,
       prevEvolution: prevEvolution ?? this.prevEvolution,
     );
+  }
+
+  String _getUrlImg(String num) {
+    return 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png';
+  }
+}
+
+Color _getTypeColor(String type) {
+  switch (type) {
+    case 'Normal':
+      return Colors.brown[200]!;
+    case 'Fire':
+      return Colors.red;
+    case 'Water':
+      return Colors.blue;
+    case 'Grass':
+      return Colors.green;
+    case 'Electric':
+      return Colors.amber;
+    case 'Ice':
+      return Colors.cyanAccent[400]!;
+    case 'Fighting':
+      return Colors.orange;
+    case 'Poison':
+      return Colors.purple;
+    case 'Ground':
+      return Colors.brown;
+    case 'Flying':
+      return Colors.indigo;
+    case 'Psychic':
+      return Colors.pink;
+    case 'Bug':
+      return Colors.lightGreen;
+    case 'Rock':
+      return Colors.grey;
+    case 'Ghost':
+      return Colors.indigo[400]!;
+    case 'Dark':
+      return Colors.black;
+    case 'Dragon':
+      return Colors.indigo[800]!;
+    case 'Steel':
+      return Colors.blueGrey;
+    case 'Fairy':
+      return Colors.pinkAccent;
+    default:
+      return Colors.grey;
   }
 }
 

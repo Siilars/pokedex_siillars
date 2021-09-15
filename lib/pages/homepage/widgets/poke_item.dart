@@ -2,15 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/consts/consts_api.dart';
 import 'package:pokedex/consts/consts_app.dart';
+import 'package:pokedex/models/pokeapi.dart';
 
 class PokeItem extends StatelessWidget {
-  final String name;
-  final int index;
-  final Color color;
-  final String num;
-  final List<String> types;
+  final Pokemon pokemon;
 
-  const PokeItem({Key? key, required this.name, required this.index, required this.color, required this.num, required this.types}) : super(key: key);
+  const PokeItem({Key? key, required this.pokemon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +31,20 @@ class PokeItem extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: CachedNetworkImage(
-                  height: 110,
-                  width: 100,
-                  placeholder: (context, url) => new Container(
-                    color: Colors.transparent,
+                child: Hero(
+                  tag: pokemon.id,
+                  child: CachedNetworkImage(
+                    height: 110,
+                    width: 100,
+                    placeholder: (context, url) => new Container(
+                      color: Colors.transparent,
+                    ),
+                    imageUrl: pokemon.urlImg,
                   ),
-                  imageUrl: 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png',
                 ),
               ),
               Text(
-                name,
+                pokemon.name,
                 style: TextStyle(
                   fontFamily: 'Google',
                   fontSize: 22,
@@ -57,15 +57,15 @@ class PokeItem extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 30),
                 child: Column(
                     children: List.generate(
-                  types.length,
+                  pokemon.type.length,
                   (index) => Container(
                     margin: EdgeInsets.only(bottom: 7),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color.fromARGB(90, 255, 255, 255)),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Text(
-                        types[index].trim(),
-                        style: TextStyle(fontFamily: 'Google', fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+                        pokemon.type[index].trim(),
+                        style: TextStyle(fontFamily: 'Google', fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),
@@ -75,7 +75,7 @@ class PokeItem extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
-          color: ConstsAPI.getColorType(type: types[0]),
+          color: pokemon.typeColor,
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),

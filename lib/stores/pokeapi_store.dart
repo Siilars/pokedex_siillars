@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/consts/consts_api.dart';
+import 'package:pokedex/models/poke_details.dart';
 import 'package:pokedex/models/pokeapi.dart';
 part 'pokeapi_store.g.dart';
 
@@ -17,6 +18,15 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   List<Pokemon> pokemonList = [];
 
+  @observable
+  Pokemon _pokemonAtual = Pokemon();
+
+  @observable
+  int? pokemonAnimated;
+
+  @computed
+  Pokemon get getPokemonAtual => _pokemonAtual;
+
   @action
   Future<void> fetchPokemonList() async {
     pokemonList = await _loadPokeAPI();
@@ -25,6 +35,12 @@ abstract class _PokeApiStoreBase with Store {
   @action
   getPokemon({required int index}) {
     return pokemonList[index];
+  }
+
+  @action
+  setPokemonAtual({required Pokemon pokemon}) {
+    _pokemonAtual = pokemon;
+    pokemonAnimated = pokemon.id;
   }
 
   @action
@@ -52,6 +68,19 @@ abstract class _PokeApiStoreBase with Store {
       print("Erro ao carregar lista");
       print(stacktrace);
       return [];
+    }
+  }
+
+  Future<PokeDetails> loadPokeDetails(int id) async {
+    try {
+      final response = await dio.get('${ConstsAPI.pokeapiV2}$id');
+
+      PokeDetails pokeDetails = PokeDetails.fromMap(response.data);
+      return pokeDetails;
+    } catch (error, stacktrace) {
+      print("Erro ao mostrar info");
+      print(stacktrace);
+      return PokeDetails();
     }
   }
 }
