@@ -3,11 +3,16 @@ import 'package:pokedex/models/version_group_details.dart';
 
 class Move {
   final NameUrl move;
+  final String moveLearnMethodDoVitor;
   final List<VersionGroupDetail> versionGroupDetails;
+
+  bool get isLvlUp => versionGroupDetails.any((element) => element.moveLearnMethod.name == 'level-up');
+  bool get isTutor => versionGroupDetails.any((element) => element.moveLearnMethod.name == 'tutor');
 
   Move({
     this.move = const NameUrl(),
     this.versionGroupDetails = const <VersionGroupDetail>[],
+    this.moveLearnMethodDoVitor = '',
   });
   factory Move.fromMap(Map<String, dynamic> map) {
     return Move(

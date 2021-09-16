@@ -6,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/consts/consts_api.dart';
+import 'package:pokedex/models/move_pokemon.dart';
 import 'package:pokedex/models/pokemon_details_model.dart';
 import 'package:pokedex/models/poke_model.dart';
+import 'package:pokedex/models/version_group_details.dart';
 part 'pokemon_controller.g.dart';
 
 class PokemonController = _PokemonControllerStoreBase with _$PokemonController;
@@ -29,6 +31,29 @@ abstract class _PokemonControllerStoreBase with Store {
 
   @computed
   Pokemon get getPokemonAtual => _pokemonAtual;
+
+  @computed
+  List<Move> get movesFiltered {
+    List<Move> listMove = [];
+
+    for (final move in pokeDetail.moves) {
+      for (final moveDetail in move.versionGroupDetails) {
+        if (moveDetail.moveLearnMethod.name == 'level-up') {
+          final versionGroupDetail = VersionGroupDetail(
+            moveLearnMethod: moveDetail.moveLearnMethod,
+            levelLearnedAt: moveDetail.levelLearnedAt,
+          );
+          final auxMove = Move(move: move.move, versionGroupDetails: [versionGroupDetail]);
+          listMove.add(auxMove);
+          break;
+        }
+      }
+    }
+
+    listMove.sort((a, b) => a.versionGroupDetails[0].levelLearnedAt.compareTo(b.versionGroupDetails[0].levelLearnedAt));
+
+    return listMove;
+  }
 
   @action
   _getPokemonDetails({required int id}) async {

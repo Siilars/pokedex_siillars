@@ -12,11 +12,12 @@ class MovePokemon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PokemonController pokeController = Provider.of<PokemonController>(context);
-    return Observer(builder: (context) {
-      return ListView.builder(
-          itemCount: pokeController.pokeDetail.moves.length,
+    return Observer(
+      builder: (context) {
+        return ListView.builder(
+          itemCount: pokeController.movesFiltered.length,
           itemBuilder: (context, index) {
-            Move move = pokeController.pokeDetail.moves[index];
+            Move move = pokeController.movesFiltered[index];
             return Container(
               height: 50,
               width: 50,
@@ -28,6 +29,11 @@ class MovePokemon extends StatelessWidget {
                   ),
                   Icon(Icons.local_hospital_rounded),
                   Icon(Icons.forward),
+                  Text(
+                    move.moveLearnMethodDoVitor,
+                    style: TextStyle(fontSize: 16, fontFamily: 'Google'),
+                  ),
+                  SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       move.move.name,
@@ -38,7 +44,9 @@ class MovePokemon extends StatelessWidget {
                 ],
               ),
             );
-          });
-    });
+          },
+        );
+      },
+    );
   }
 }
