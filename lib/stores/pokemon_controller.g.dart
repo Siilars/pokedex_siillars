@@ -12,9 +12,20 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
   Computed<Pokemon>? _$getPokemonAtualComputed;
 
   @override
-  Pokemon get getPokemonAtual => (_$getPokemonAtualComputed ??= Computed<Pokemon>(() => super.getPokemonAtual, name: '_PokemonControllerStoreBase.getPokemonAtual')).value;
+  Pokemon get getPokemonAtual => (_$getPokemonAtualComputed ??=
+          Computed<Pokemon>(() => super.getPokemonAtual,
+              name: '_PokemonControllerStoreBase.getPokemonAtual'))
+      .value;
+  Computed<List<Move>>? _$movesFilteredComputed;
 
-  final _$pokemonListAtom = Atom(name: '_PokemonControllerStoreBase.pokemonList');
+  @override
+  List<Move> get movesFiltered => (_$movesFilteredComputed ??=
+          Computed<List<Move>>(() => super.movesFiltered,
+              name: '_PokemonControllerStoreBase.movesFiltered'))
+      .value;
+
+  final _$pokemonListAtom =
+      Atom(name: '_PokemonControllerStoreBase.pokemonList');
 
   @override
   List<Pokemon> get pokemonList {
@@ -44,7 +55,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
     });
   }
 
-  final _$_pokemonAtualAtom = Atom(name: '_PokemonControllerStoreBase._pokemonAtual');
+  final _$_pokemonAtualAtom =
+      Atom(name: '_PokemonControllerStoreBase._pokemonAtual');
 
   @override
   Pokemon get _pokemonAtual {
@@ -59,7 +71,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
     });
   }
 
-  final _$pokemonAnimatedAtom = Atom(name: '_PokemonControllerStoreBase.pokemonAnimated');
+  final _$pokemonAnimatedAtom =
+      Atom(name: '_PokemonControllerStoreBase.pokemonAnimated');
 
   @override
   int? get pokemonAnimated {
@@ -74,25 +87,30 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
     });
   }
 
-  final _$getPokemonDetailsAsyncAction = AsyncAction('_PokemonControllerStoreBase.getPokemonDetails');
+  final _$_getPokemonDetailsAsyncAction =
+      AsyncAction('_PokemonControllerStoreBase._getPokemonDetails');
 
   @override
   Future _getPokemonDetails({required int id}) {
-    return _$getPokemonDetailsAsyncAction.run(() => super._getPokemonDetails(id: id));
+    return _$_getPokemonDetailsAsyncAction
+        .run(() => super._getPokemonDetails(id: id));
   }
 
-  final _$fetchPokemonListAsyncAction = AsyncAction('_PokemonControllerStoreBase.fetchPokemonList');
+  final _$fetchPokemonListAsyncAction =
+      AsyncAction('_PokemonControllerStoreBase.fetchPokemonList');
 
   @override
   Future<void> fetchPokemonList() {
     return _$fetchPokemonListAsyncAction.run(() => super.fetchPokemonList());
   }
 
-  final _$_PokemonControllerStoreBaseActionController = ActionController(name: '_PokemonControllerStoreBase');
+  final _$_PokemonControllerStoreBaseActionController =
+      ActionController(name: '_PokemonControllerStoreBase');
 
   @override
   dynamic getPokemon({required int index}) {
-    final _$actionInfo = _$_PokemonControllerStoreBaseActionController.startAction(name: '_PokemonControllerStoreBase.getPokemon');
+    final _$actionInfo = _$_PokemonControllerStoreBaseActionController
+        .startAction(name: '_PokemonControllerStoreBase.getPokemon');
     try {
       return super.getPokemon(index: index);
     } finally {
@@ -102,7 +120,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
 
   @override
   dynamic setPokemonAtual({required Pokemon pokemon}) {
-    final _$actionInfo = _$_PokemonControllerStoreBaseActionController.startAction(name: '_PokemonControllerStoreBase.setPokemonAtual');
+    final _$actionInfo = _$_PokemonControllerStoreBaseActionController
+        .startAction(name: '_PokemonControllerStoreBase.setPokemonAtual');
     try {
       return super.setPokemonAtual(pokemon: pokemon);
     } finally {
@@ -112,7 +131,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
 
   @override
   dynamic changeName({required Pokemon pokemon, required String newName}) {
-    final _$actionInfo = _$_PokemonControllerStoreBaseActionController.startAction(name: '_PokemonControllerStoreBase.changeName');
+    final _$actionInfo = _$_PokemonControllerStoreBaseActionController
+        .startAction(name: '_PokemonControllerStoreBase.changeName');
     try {
       return super.changeName(pokemon: pokemon, newName: newName);
     } finally {
@@ -122,7 +142,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
 
   @override
   Widget getImage({required String numero}) {
-    final _$actionInfo = _$_PokemonControllerStoreBaseActionController.startAction(name: '_PokemonControllerStoreBase.getImage');
+    final _$actionInfo = _$_PokemonControllerStoreBaseActionController
+        .startAction(name: '_PokemonControllerStoreBase.getImage');
     try {
       return super.getImage(numero: numero);
     } finally {
@@ -136,7 +157,8 @@ mixin _$PokemonController on _PokemonControllerStoreBase, Store {
 pokemonList: ${pokemonList},
 pokeDetail: ${pokeDetail},
 pokemonAnimated: ${pokemonAnimated},
-getPokemonAtual: ${getPokemonAtual}
+getPokemonAtual: ${getPokemonAtual},
+movesFiltered: ${movesFiltered}
     ''';
   }
 }
