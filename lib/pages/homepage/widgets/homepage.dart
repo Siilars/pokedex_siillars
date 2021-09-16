@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/consts/consts_app.dart';
-import 'package:pokedex/models/pokeapi.dart';
+import 'package:pokedex/models/poke_model.dart';
 import 'package:pokedex/pages/homepage/widgets/dialog_change_name.dart';
 import 'package:pokedex/pages/homepage/widgets/poke_item.dart';
 import 'package:pokedex/pages/poke_detail/poke_detail_page.dart';
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/stores/pokemon_controller.dart';
 import 'package:provider/provider.dart';
 
 import 'app_bar_home.dart';
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   late final double screenWidth = MediaQuery.of(context).size.width;
   late final double statusWidth = MediaQuery.of(context).padding.top;
 
-  late final PokeApiStore pokeController = Provider.of<PokeApiStore>(context)..fetchPokemonList();
+  late final PokemonController pokeController = Provider.of<PokemonController>(context)..fetchPokemonList();
 
   @override
   Widget build(BuildContext context) {

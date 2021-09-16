@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/models/pokeapi.dart';
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/models/poke_model.dart';
+import 'package:pokedex/stores/pokemon_controller.dart';
 
 class DialogChangeName extends StatefulWidget {
   final Pokemon pokemon;
-  final PokeApiStore pokeController;
+  final PokemonController pokeController;
 
   const DialogChangeName({Key? key, required this.pokemon, required this.pokeController}) : super(key: key);
 

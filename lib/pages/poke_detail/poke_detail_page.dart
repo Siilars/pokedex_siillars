@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex/about_page/about_page.dart';
 import 'package:pokedex/consts/consts_app.dart';
-import 'package:pokedex/models/pokeapi.dart';
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/models/poke_model.dart';
+import 'package:pokedex/stores/pokemon_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
@@ -41,7 +41,7 @@ class _PokeDetailPageState extends State<PokeDetailPage> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    late final pokemonController = Provider.of<PokeApiStore>(context);
+    late final pokemonController = Provider.of<PokemonController>(context);
 
     return Observer(
       builder: (context) {

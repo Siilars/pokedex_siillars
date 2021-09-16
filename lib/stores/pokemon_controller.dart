@@ -6,17 +6,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex/consts/consts_api.dart';
-import 'package:pokedex/models/poke_details.dart';
-import 'package:pokedex/models/pokeapi.dart';
-part 'pokeapi_store.g.dart';
+import 'package:pokedex/models/pokemon_details_model.dart';
+import 'package:pokedex/models/poke_model.dart';
+part 'pokemon_controller.g.dart';
 
-class PokeApiStore = _PokeApiStoreBase with _$PokeApiStore;
+class PokemonController = _PokemonControllerStoreBase with _$PokemonController;
 
-abstract class _PokeApiStoreBase with Store {
+abstract class _PokemonControllerStoreBase with Store {
   Dio dio = Dio();
 
   @observable
   List<Pokemon> pokemonList = [];
+
+  @observable
+  PokeDetail pokeDetail = PokeDetail();
 
   @observable
   Pokemon _pokemonAtual = Pokemon();
@@ -26,6 +29,11 @@ abstract class _PokeApiStoreBase with Store {
 
   @computed
   Pokemon get getPokemonAtual => _pokemonAtual;
+
+  @action
+  _getPokemonDetails({required int id}) async {
+    pokeDetail = await _loadPokeDetails(id);
+  }
 
   @action
   Future<void> fetchPokemonList() async {
@@ -41,6 +49,7 @@ abstract class _PokeApiStoreBase with Store {
   setPokemonAtual({required Pokemon pokemon}) {
     _pokemonAtual = pokemon;
     pokemonAnimated = pokemon.id;
+    _getPokemonDetails(id: pokemon.id);
   }
 
   @action
@@ -71,16 +80,16 @@ abstract class _PokeApiStoreBase with Store {
     }
   }
 
-  Future<PokeDetails> loadPokeDetails(int id) async {
+  Future<PokeDetail> _loadPokeDetails(int id) async {
     try {
       final response = await dio.get('${ConstsAPI.pokeapiV2}$id');
 
-      PokeDetails pokeDetails = PokeDetails.fromMap(response.data);
+      PokeDetail pokeDetails = PokeDetail.fromMap(response.data);
       return pokeDetails;
     } catch (error, stacktrace) {
       print("Erro ao mostrar info");
       print(stacktrace);
-      return PokeDetails();
+      return PokeDetail();
     }
   }
 }

@@ -11,7 +11,7 @@ class Move {
   });
   factory Move.fromMap(Map<String, dynamic> map) {
     return Move(
-      move: map['move'] == null ? NameUrl() : NameUrl.fromMap(map),
+      move: map['move'] == null ? NameUrl() : NameUrl.fromMap(map['move']),
       versionGroupDetails: map['version_group_details'] == null ? <VersionGroupDetail>[] : (map['version_group_details'] as List).map((e) => VersionGroupDetail.fromMap(e)).toList(),
     );
   }

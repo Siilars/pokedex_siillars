@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/pages/homepage/widgets/homepage.dart';
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/stores/pokemon_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         home: HomePage(),
       ),
       providers: <SingleChildWidget>[
-        Provider<PokeApiStore>(
-          create: (_) => PokeApiStore(),
+        Provider<PokemonController>(
+          create: (_) => PokemonController(),
         )
       ],
     );

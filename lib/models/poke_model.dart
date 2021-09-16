@@ -62,8 +62,8 @@ class Pokemon {
       spawnTime: map['spawnTime'] ?? '',
       multipliers: map['multipliers'] == null ? <double>[] : map['multipliers'].cast<double>(),
       weaknesses: map['weaknesses'] == null ? <String>[] : map['weaknesses'].cast<String>(),
-      nextEvolution: map['nextEvolution'] == null ? <Evolution>[] : (map['nextEvolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
-      prevEvolution: map['prevEvolution'] == null ? <Evolution>[] : (map['prevEvolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
+      nextEvolution: map['next_evolution'] == null ? <Evolution>[] : (map['next_evolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
+      prevEvolution: map['prev_evolution'] == null ? <Evolution>[] : (map['prev_evolution'] as List).map((e) => Evolution.fromMap(e)).toList(),
     );
   }
 

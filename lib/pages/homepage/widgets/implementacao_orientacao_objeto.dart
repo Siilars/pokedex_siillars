@@ -1,4 +1,4 @@
-import 'package:pokedex/models/pokeapi.dart';
+import 'package:pokedex/models/poke_model.dart';
 
 void printCarteiraNameMaisListaDePokebons(Carteira cart) {
   cart.listPokemon.forEach((poke) {
@@ -78,7 +78,7 @@ main() {
   // carteiraDois.saldo = carteiraDois.saldo - mandaPix;
   // carteira.saldo = mandaPix + carteira.saldo;
   // print('Carteira do ${carteira.nome} ${carteira.saldo} ');
-  // print('Carteira do ${carteiraDois.nome} ${carteiraDois.saldo} ');
+  //print('Carteira do ${carteiraDois.nome} ${carteiraDois.saldo} ');
 }
 
 class Carteira {

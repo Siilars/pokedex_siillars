@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
+import 'package:pokedex/pages/homepage/widgets/evolution_page.dart';
+import 'package:pokedex/pages/homepage/widgets/move_page.dart';
 import 'package:pokedex/pages/homepage/widgets/status_bar.dart';
 
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/stores/pokemon_controller.dart';
 import 'package:provider/provider.dart';
 
 class AboutPage extends StatefulWidget {
@@ -15,7 +17,7 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-  late final pokemonController = Provider.of<PokeApiStore>(context);
+  late final pokemonController = Provider.of<PokemonController>(context);
   PageController? _pageController;
 
   @override
@@ -57,13 +59,13 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
               ),
           tabs: <Widget>[
             Tab(
-              text: "About",
+              text: "Status",
             ),
             Tab(
               text: "Evolutions",
             ),
             Tab(
-              text: "Status",
+              text: "Moves",
             ),
           ],
         ),
@@ -90,71 +92,15 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
                     PokemonStatusBar(status: 'Speed', cor: Colors.purple, value: 0.9),
                   ],
                 ),
-                // child: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: <Widget>[
-                //     Text(
-                //       'Description',
-                //       style: TextStyle(
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       height: 10,
-                //     ),
-                //     Text(
-                //       'Sub Description',
-                //       style: TextStyle(
-                //         fontSize: 14,
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ),
             ),
             Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Evolutions Path',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Sub Evo Paths',
-                        style: TextStyle(fontSize: 14),
-                      )
-                    ],
-                  ),
-                ),
-                color: Colors.transparent),
-            Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Status',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Sub Stats',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-                color: Colors.transparent),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                child: EvolutionPage(),
+              ),
+            ),
+            MovePokemon()
           ]),
     );
   }

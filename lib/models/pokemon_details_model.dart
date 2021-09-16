@@ -6,7 +6,7 @@ import 'package:pokedex/models/move_pokemon.dart';
 import 'package:pokedex/models/stats_pokemon.dart';
 import 'package:pokedex/models/type_pokemon.dart';
 
-class PokeDetails {
+class PokeDetail {
   final List<Ability> abilities;
   final int baseExperience;
   final List<NameUrl> forms;
@@ -23,7 +23,7 @@ class PokeDetails {
   final int weight;
   final List<Type> types;
 
-  PokeDetails({
+  PokeDetail({
     this.abilities = const <Ability>[],
     this.baseExperience = 0,
     this.forms = const <NameUrl>[],
@@ -41,8 +41,8 @@ class PokeDetails {
     this.types = const <Type>[],
   });
 
-  factory PokeDetails.fromMap(Map<String, dynamic> map) {
-    return PokeDetails(
+  factory PokeDetail.fromMap(Map<String, dynamic> map) {
+    return PokeDetail(
       abilities: map['abilities'] == null ? <Ability>[] : (map['abilities'] as List).map((e) => Ability.fromMap(e)).toList(),
       baseExperience: map['base_experience'] ?? 0,
       forms: map['forms'] == null ? <NameUrl>[] : (map['forms'] as List).map((e) => NameUrl.fromMap(e)).toList(),

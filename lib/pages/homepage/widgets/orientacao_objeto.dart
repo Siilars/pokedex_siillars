@@ -1,4 +1,4 @@
-import 'package:pokedex/models/pokeapi.dart';
+import 'package:pokedex/models/poke_model.dart';
 
 main() {
   List<Pokemon> listPokemons = [];

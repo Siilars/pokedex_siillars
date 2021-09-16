@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/consts/consts_api.dart';
 import 'package:pokedex/consts/consts_app.dart';
-import 'package:pokedex/models/pokeapi.dart';
+import 'package:pokedex/models/poke_model.dart';
 
 class PokeItem extends StatelessWidget {
   final Pokemon pokemon;
